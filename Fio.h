@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 
 using namespace std;
@@ -8,6 +9,8 @@ using namespace std;
 class Fio
 {
 	friend istream& operator >> (std::istream& in, Fio& f);
+	friend ostream& operator << (std::ostream&, Fio&);
+
 	string name;
 	string surname;
 	string patronymic;
@@ -20,7 +23,6 @@ public:
 	void SetName(string);
 	void SetSurname(string);
 	void SetPatronymic(string);
-	bool operator ==(const Fio other);
 	
 
 };

@@ -50,3 +50,11 @@ istream& operator>>(std::istream& in, Fio& f)
 	in >> f.name >> f.surname >> f.patronymic;
 	return in;
 }
+
+ostream& operator<<(std::ostream& out, Fio& f)
+{
+	out << setw(10) << f.surname
+		<< setw(10) << f.name
+		<< setw(15) << f.patronymic;
+	return out;
+}

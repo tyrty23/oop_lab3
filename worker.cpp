@@ -17,28 +17,11 @@ Worker::Worker(Fio fio1, int dep, double sal)
 	salary = sal;
 }
 
-void Worker::AddWorker(Worker* ar)
-{
-	string n, s, p;
-	cout << "¬ведите фамилию работника: ";
-	cin >> s;
-	cout << "¬ведите им€ работника: ";
-	cin >> n;	
-	cout << "¬ведите отчество работника: ";
-	cin >> p;
-	cout << "¬ведите номер отдела: ";
-	ar[counter].num_dep = right_int();	
-	cout << "¬ведите оклад работника ($): ";
-	ar[counter].salary = right_int();
-	ar[counter].fio= Fio::Fio(n, s, p);;
-	counter++;
-}
-
 void Worker::PrintAll(Worker*ar)
 {
 	line();
 	for (int i = 0; i < counter; i++) {
-		PrintOne(ar, i);
+		cout << ar[i] << endl;;
 	}
 }
 
@@ -102,7 +85,7 @@ void Worker::PrintDep(Worker* ar)
 		line();
 		for (int i = 0; i < counter; i++) {
 			if (test == ar[i].num_dep) {
-				PrintOne(ar, i);
+				cout << ar[i] << endl;;
 			}
 		}
 	}
@@ -138,7 +121,7 @@ void Worker::FindWorker(Worker* ar)
 		line();
 		for (int i = 0; i < counter; i++) {
 			if (ar[i] == test1) {
-				PrintOne(ar, i);
+				cout << ar[i] << endl;;
 			}
 		}
 	}
@@ -179,16 +162,8 @@ void Worker::line()
 		<< setw(15) << "ќклад (&)"<< endl;
 }
 
-void Worker::PrintOne(Worker* ar, int i)
-{
-	cout << setw(10) << ar[i].fio.GetSurname()
-		<< setw(10) << ar[i].fio.GetName()
-		<< setw(15) << ar[i].fio.GetPatronymic()
-		<< setw(15) << ar[i].num_dep
-		<< setw(20) << ar[i].salary << endl;
-}
 
-void Worker::AddWorker2(Worker* ar)
+void Worker::AddWorker(Worker* ar)
 {
 	cout << "¬вдите нового работника в формате ‘»ќ, отдел, оклад через пробел или enter: \n";
 	cin >> ar[counter];
@@ -208,6 +183,14 @@ bool operator==(Worker w ,  Fio f)
 
 istream& operator>>(std::istream& in, Worker& w)
 {
-	in >> w.fio >> w.num_dep>>w.salary;
+	in >> w.fio >> w.num_dep >> w.salary;
 	return in;
+}
+
+ostream& operator<<(std::ostream& out, Worker& w)
+{
+	out << w.fio
+		<< setw(15) << w.num_dep
+		<< setw(20) << w.salary << endl;
+	return out;
 }
